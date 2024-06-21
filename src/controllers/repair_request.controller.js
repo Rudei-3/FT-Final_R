@@ -1,4 +1,4 @@
-import RepairRequest from "../models/repairRequest.model.js";
+import { RepairRequest } from "../models/repairRequest.model.js";
 import { checkNullUndefined } from "../utils/tools.js";
 
 const addRepairRequest = async (req, res) => {
@@ -59,7 +59,7 @@ const getAllRepairRequests = async (req, res) => {
     try {
         const allRepairRequests = await RepairRequest.find({}).populate('categoryId').populate('productId');
 
-        if (!allRepairRequests) {
+        if (!allRepairRequests.length) {
             return res.status(400).json({
                 status: "Failed",
                 message: "No repair requests found",
